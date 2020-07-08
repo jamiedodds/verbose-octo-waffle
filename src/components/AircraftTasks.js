@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import MaintenanceTask from "./MaintenanceTask";
 
 function AircraftTasks({ aircraftTasks, toggleTask, deleteTask }) {

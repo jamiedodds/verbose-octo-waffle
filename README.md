@@ -4,12 +4,12 @@ With this application, you can add the name of an aircarft, then set tasks for m
 
 ### To run the application
 
-download the files
+Download the files
 
-cd into the file
+In the terminal cd into the downloaded file or open up in an editor and open the terminal in there.
 
-npm install
+run `npm install`
 
-then `npm start` or `yarn start`
+then run `npm start` or `yarn start`
 
 The App should be running on http://localhost:3000/

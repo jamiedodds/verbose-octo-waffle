@@ -1,7 +1,12 @@
 import React from "react";
+import Aircrafts from "./components/Aircrafts";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div className="app">
+      <Aircrafts />
+    </div>
+  );
 }
 
 export default App;

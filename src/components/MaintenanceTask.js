@@ -1,24 +1,32 @@
 import React from "react";
 
-export default function MaintenanceTask({ tasks, toggleTask, deleteTask }) {
+export default function MaintenanceTask({
+  taskName,
+  aircraftId,
+  taskId,
+  checked,
+  choosenEngineer,
+  toggleTask,
+  deleteTask,
+}) {
   function handleTaskClick() {
-    toggleTask(tasks.id);
+    toggleTask(aircraftId, taskId);
   }
 
   function handleDeleteTask() {
-    deleteTask(tasks.id);
+    deleteTask(aircraftId, taskId);
   }
 
   return (
     <div>
       <input
         type="checkbox"
-        name={tasks.name}
-        checked={tasks.checked}
+        name={taskName}
+        checked={checked}
         onChange={handleTaskClick}
       />
       <label>
-        {tasks.name}, work to be carried out by {tasks.engineer}
+        {taskName}, work to be carried out by {choosenEngineer}
       </label>
       <button onClick={handleDeleteTask}>Delete</button>
     </div>

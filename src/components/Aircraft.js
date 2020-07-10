@@ -69,6 +69,9 @@ function Aircraft({
             );
           })
         : null}
+      <p>
+        {tasks.filter((task) => !task.checked).length} tasks left to complete.
+      </p>
     </div>
   );
 }

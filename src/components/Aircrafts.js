@@ -35,7 +35,6 @@ function Aircrafts() {
   };
 
   const handleAddTask = (value, id, engineer) => {
-    console.log(value, id);
     setAircrafts(
       aircrafts.map((aircraft) => {
         if (aircraft.id !== id) return aircraft;
@@ -53,19 +52,23 @@ function Aircrafts() {
         };
       })
     );
-
-    console.log(aircrafts);
   };
 
   function deleteTask(aircraftId, id) {
-    console.log(id);
     const newAircrafts = [...aircrafts];
     const aircraft = newAircrafts.find(
       (aircraft) => aircraft.id === aircraftId
     );
     const newTasks = aircraft.tasks.filter((tasks) => id !== tasks.id);
-    console.log(aircraft.tasks.id);
-    setAircrafts(newAircrafts);
+    setAircrafts(
+      aircrafts.map((aircraft) => {
+        if (aircraft.id !== aircraftId) return aircraft;
+        return {
+          ...aircraft,
+          tasks: newTasks,
+        };
+      })
+    );
   }
 
   function toggleTask(aircraftId, id) {

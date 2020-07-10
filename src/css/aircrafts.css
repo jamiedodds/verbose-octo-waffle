@@ -1,0 +1,35 @@
+.aircrafts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px;
+}
+
+.main-title,
+.add-aircraft-title {
+  margin-bottom: 20px;
+}
+
+.aircraft-entry {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.aircraft-entry input {
+  height: 40px;
+  width: 300px;
+  border: none;
+  margin-right: 20px;
+  padding: 0 10px;
+}
+
+.aircraft-entry button {
+  height: 40px;
+  border: none;
+  border-radius: 0;
+  width: 80px;
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: #14c1c3;
+}

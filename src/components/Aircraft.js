@@ -11,7 +11,7 @@ function Aircraft({
   toggleTask,
   deleteTask,
 }) {
-  const [showTasks, setShowTasks] = useState(false);
+  const [showTasks, setShowTasks] = useState(true);
   const [chooseEngineer, setChooseEngineer] = React.useState();
   const taskNameRef = useRef();
 

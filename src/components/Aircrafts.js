@@ -2,25 +2,26 @@ import React, { useState, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import Aircraft from "./Aircraft";
+import "../css/aircrafts.css";
 
 function Aircrafts() {
   const [aircrafts, setAircrafts] = useState([]);
   const [engineers, setEngineers] = useState([
     {
       id: uuidv4(),
-      name: "John Smith",
+      name: "Jack Shephard",
     },
     {
       id: uuidv4(),
-      name: "Jon Snow",
+      name: "Kate Austen",
     },
     {
       id: uuidv4(),
-      name: "Arya Stark",
+      name: "Hugo Reyes",
     },
     {
       id: uuidv4(),
-      name: "Khal Drogo",
+      name: "James Ford",
     },
   ]);
   const aircraftNameRef = useRef();
@@ -35,6 +36,7 @@ function Aircrafts() {
   };
 
   const handleAddTask = (value, id, engineer) => {
+    if (value === "") return;
     setAircrafts(
       aircrafts.map((aircraft) => {
         if (aircraft.id !== id) return aircraft;
@@ -82,14 +84,17 @@ function Aircrafts() {
   }
 
   return (
-    <div>
-      <h2>Add an Aircraft for maintenance</h2>
-      <input
-        ref={aircraftNameRef}
-        type="text"
-        placeholder="Enter name of aircraft for maintenance"
-      />
-      <button onClick={handleAddAircraft}>Submit</button>
+    <div className="aircrafts">
+      <h1 className="main-title">Oceanic Airlines Flight Maintenance</h1>
+      <h2 className="add-aircraft-title">Add an Aircraft for maintenance</h2>
+      <div className="aircraft-entry">
+        <input
+          ref={aircraftNameRef}
+          type="text"
+          placeholder="Enter name of aircraft for maintenance"
+        />
+        <button onClick={handleAddAircraft}>Submit</button>
+      </div>
       {aircrafts.map((aircraft) => (
         <Aircraft
           key={aircraft.id}

@@ -29,30 +29,35 @@ function Aircraft({
   };
 
   return (
-    <div>
-      <h3>{name}</h3>
+    <div className="aircraft">
+      <div className="aircraft-name-container">
+        <h3 className="aircraft-name">{name}</h3>
 
-      <button onClick={handleShowTasks}>
-        {showTasks ? "Hide Tasks" : "Show Tasks"}
-      </button>
-      <input
-        ref={taskNameRef}
-        type="text"
-        placeholder="Enter Task Description"
-      />
+        <button onClick={handleShowTasks}>
+          {showTasks ? "Hide Tasks" : "Show Tasks"}
+        </button>
+      </div>
+      <div className="task-input-container">
+        <input
+          className="task-description"
+          ref={taskNameRef}
+          type="text"
+          placeholder="Enter Task Description"
+        />
 
-      <select
-        value={chooseEngineer}
-        onChange={(e) => setChooseEngineer(e.currentTarget.value)}
-      >
-        {engineers.map((engineer) => (
-          <option key={engineer.id} value={engineer.name}>
-            {engineer.name}
-          </option>
-        ))}
-      </select>
+        <select
+          value={chooseEngineer}
+          onChange={(e) => setChooseEngineer(e.currentTarget.value)}
+        >
+          {engineers.map((engineer) => (
+            <option key={engineer.id} value={engineer.name}>
+              {engineer.name}
+            </option>
+          ))}
+        </select>
 
-      <button onClick={addTask}>Add Task</button>
+        <button onClick={addTask}>Add Task</button>
+      </div>
       {showTasks
         ? tasks.map((task) => {
             return (
@@ -69,7 +74,7 @@ function Aircraft({
             );
           })
         : null}
-      <p>
+      <p className="tasks-left">
         {tasks.filter((task) => !task.checked).length} tasks left to complete.
       </p>
     </div>

@@ -1,11 +1,13 @@
 import React, { useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { v4 as uuidv4 } from "uuid";
 
 import Aircraft from "./Aircraft";
 import "../css/aircrafts.css";
+import * as actions from "../store/actions/aircrafts";
 
 function Aircrafts() {
-  const [aircrafts, setAircrafts] = useState([]);
   const [engineers, setEngineers] = useState([
     {
       id: uuidv4(),
@@ -26,61 +28,46 @@ function Aircrafts() {
   ]);
   const aircraftNameRef = useRef();
 
+  const dispatch = useDispatch();
+
+  const aircrafts = useSelector((state) => {
+    return state.aircrafts;
+  });
+
+  const onAddAircraft = (aircraftName) => {
+    dispatch(actions.addAircraft(aircraftName));
+  };
+
+  const onAddAircraftTask = (taskName, id, engineer) => {
+    dispatch(actions.addAircraftTask(taskName, id, engineer));
+  };
+
+  const onToggleTask = (aircraftId, id) => {
+    dispatch(actions.toggleAircraftTask(aircraftId, id));
+  };
+
+  const onDeleteTask = (aircraftId, id) => {
+    dispatch(actions.deleteTask(aircraftId, id));
+  };
+
   const handleAddAircraft = () => {
     const aircraftName = aircraftNameRef.current.value;
     if (aircraftName === "") return;
-    setAircrafts((prevProps) => {
-      return [...prevProps, { id: uuidv4(), name: aircraftName, tasks: [] }];
-    });
+    onAddAircraft(aircraftName);
     aircraftNameRef.current.value = null;
   };
 
   const handleAddTask = (value, id, engineer) => {
     if (value === "") return;
-    setAircrafts(
-      aircrafts.map((aircraft) => {
-        if (aircraft.id !== id) return aircraft;
-        return {
-          ...aircraft,
-          tasks: [
-            ...aircraft.tasks,
-            {
-              taskName: value,
-              id: uuidv4(),
-              engineer: engineer,
-              checked: false,
-            },
-          ],
-        };
-      })
-    );
+    onAddAircraftTask(value, id, engineer);
   };
 
   function deleteTask(aircraftId, id) {
-    const newAircrafts = [...aircrafts];
-    const aircraft = newAircrafts.find(
-      (aircraft) => aircraft.id === aircraftId
-    );
-    const newTasks = aircraft.tasks.filter((tasks) => id !== tasks.id);
-    setAircrafts(
-      aircrafts.map((aircraft) => {
-        if (aircraft.id !== aircraftId) return aircraft;
-        return {
-          ...aircraft,
-          tasks: newTasks,
-        };
-      })
-    );
+    onDeleteTask(aircraftId, id);
   }
 
   function toggleTask(aircraftId, id) {
-    const newAircrafts = [...aircrafts];
-    const aircraft = newAircrafts.find(
-      (aircraft) => aircraft.id === aircraftId
-    );
-    const task = aircraft.tasks.find((task) => task.id === id);
-    task.checked = !task.checked;
-    setAircrafts(newAircrafts);
+    onToggleTask(aircraftId, id);
   }
 
   return (

@@ -18,17 +18,20 @@ export default function MaintenanceTask({
   }
 
   return (
-    <div>
+    <div className="tasks">
       <input
+        className="checkbox"
         type="checkbox"
         name={taskName}
         checked={checked}
         onChange={handleTaskClick}
       />
-      <label>
+      <label className="task-name">
         {taskName}, work to be carried out by {choosenEngineer}
       </label>
-      <button onClick={handleDeleteTask}>Delete</button>
+      <button className="delete-task" onClick={handleDeleteTask}>
+        Delete
+      </button>
     </div>
   );
 }

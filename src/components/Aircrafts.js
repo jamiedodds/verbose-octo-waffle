@@ -1,8 +1,11 @@
 import React, { useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { v4 as uuidv4 } from "uuid";
 
 import Aircraft from "./Aircraft";
 import "../css/aircrafts.css";
+import * as actions from "../store/actions/aircrafts";
 
 function Aircrafts() {
   const [aircrafts, setAircrafts] = useState([]);
@@ -26,12 +29,20 @@ function Aircrafts() {
   ]);
   const aircraftNameRef = useRef();
 
+  const dispatch = useDispatch();
+
+  const aircraftsRedux = useSelector((state) => {
+    return state.aircrafts;
+  });
+
+  const onAddAircraft = (aircraftName) => {
+    dispatch(actions.addAircraft(aircraftName));
+  };
+
   const handleAddAircraft = () => {
     const aircraftName = aircraftNameRef.current.value;
     if (aircraftName === "") return;
-    setAircrafts((prevProps) => {
-      return [...prevProps, { id: uuidv4(), name: aircraftName, tasks: [] }];
-    });
+    onAddAircraft(aircraftName);
     aircraftNameRef.current.value = null;
   };
 
@@ -95,7 +106,7 @@ function Aircrafts() {
         />
         <button onClick={handleAddAircraft}>Submit</button>
       </div>
-      {aircrafts.map((aircraft) => (
+      {aircraftsRedux.map((aircraft) => (
         <Aircraft
           key={aircraft.id}
           id={aircraft.id}
